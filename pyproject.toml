@@ -1,0 +1,68 @@
+[build-system]
+requires = ["hatchling >= 1.26"]
+build-backend = "hatchling.build"
+
+[project]
+
+name = "kernel"
+version = "0.1.0a1"
+authors = [
+    {name = "Csaba Attila"}
+]
+
+description = """
+    This is my personal assistant, for work, and for shit... ... ... ... sorry, for college 
+"""
+
+readme = "README.md"
+requires-python = ">=3.12"
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+
+homepage = "https://github.com/Timeout17/K.E.R.N.E.L"
+
+[project.scripts]
+# ezekkel tudunk scripteket írni
+kernel = "kernel.scripts:launch"
+kernel-status = "kernel.scripts:status"
+kernel-config = "kernel.scripts:config"
+
+[tool.ruff]
+
+line-length = 100
+target-version = "py312"
+# ezek azok amiket nem néz majd a ruff
+exclude = [
+    ".venv",
+    ".env",
+    ".git",
+    ".ruff_cache",
+    ".mypy_cache",
+]
+# ezeket nézze még a kizárandó dolgokon kívűl
+extend-exclude = ["docs", "tests"]
+
+indent-width = 4
+
+[tool.pytest.ini_options]
+testpaths = ["tests"] # ez adja meg, hogy hol keresse
+python_files = ["test_*.py"] # milyen fájl neveket kell neki felismernie
+python_classes = ["Test*"] # ha van test osztály, akkor azokat határozza meg
+python_functions = ["test_*"] #milyen függvényeket tekintse teszt függvénynek
+addopts = ["--strict-markers", "--strict-config", "--tb=short", "--verbose"] 
+# alapértelmezett parancssori argumentumok
+## --strict-markers szígoruan ellenőrzi a tesztmarkereket, pl unit, integration stb, ha olyan van amit nem csináltam, akkor hibát dob
+## --strict-config Szigorúan ellenőrzi a pytest konfigurációját. Például hibát jelez, ha egy konfigurációs beállítás érvénytelen. 
+## --tb=short nem a teljes hiba üzenetet kapom meg, csak egy kisebbet
+## --verbose Részletesebb tesztkimenetet ad. Például a tesztek neveit is látni fogod futás közben, nem csak egy összesített eredményt.
+### --verbose = mennyire részletesen mutassa a tesztek futását?
+### --tb=short = mennyire részletesen mutassa a hibák tracebackjét?
+[tool.mypy]
+python_version = "3.12" # ez a verziója a mypy-nak
+ignore_missing_imports = false # nem hallgatattja el a hiányzó import hibákat
+files = "src" # ahol ellenőriz
