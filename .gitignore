@@ -1,0 +1,10 @@
+# Environments
+.venv
+.env
+venv/
+env/
+ENV/
+
+# mypy
+.mypy_cache/
+
